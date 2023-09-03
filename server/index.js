@@ -22,6 +22,13 @@ app.get("/info/:category/:mediaId", async (req, res) => {
   res.send(info);
 });
 
+app.get("/src/:category/:mediaId/:episodeId", async (req, res) => {
+  const mediaId = req.params.category + "/" + req.params.mediaId;
+  const src = await api.fetchEpisodeSources(req.params.episodeId, mediaId);
+  console.log("req src");
+  res.send(src);
+});
+
 app.get("/search/:query/:page?", async (req, res) => {
   const result = await api.search(req.params.query, req.params.page);
   const movie = result.results[0];
