@@ -1,17 +1,9 @@
 import styled from "styled-components";
-
-const CardDiv = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, minmax(100px, 1fr));
-  grid-gap: 20px;
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-  }
-`;
+import { Link } from "react-router-dom";
 
 const IMG = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   border-radius: 10px;
 
   &:hover {
@@ -21,19 +13,13 @@ const IMG = styled.img`
 `;
 
 function Card(props) {
-  const trendingImages = props.trending
-    ? props.trending.map((e) => {
-        return (
-          <div key={e.id}>
-            <a href={e.url}>
-              <IMG src={e.image} />
-            </a>
-          </div>
-        );
-      })
-    : null;
-
-  return <CardDiv>{trendingImages}</CardDiv>;
+  return (
+    <div>
+      <Link to={props.data.id}>
+        <IMG src={props.data.image} alt={props.data.title} />
+      </Link>
+    </div>
+  );
 }
 
 export default Card;
