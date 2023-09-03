@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -56,6 +56,11 @@ const Description = styled.p`
   margin-bottom: 20px;
 `;
 
+const Button = styled.button`
+  padding: 10px 20px;
+  font-size: 1.2rem;
+`;
+
 function Movie() {
   const mediaId = useLocation().pathname;
   const [info, setInfo] = useState();
@@ -103,6 +108,9 @@ function Movie() {
               ))}
             </Details>
           </div>
+          <Link to={`/player/${info.id}/${info.episodes[0].id}`}>
+            <Button>Play</Button>
+          </Link>
         </MovieInfo>
       </MovieContainer>
     </Main>
