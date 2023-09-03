@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import Cards from "../components/Cards";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "../components/Spinner";
 
 const Main = styled.div`
   padding: 0 50px;
@@ -32,12 +33,14 @@ function Home() {
       })
     : null;
 
-  return (
+  return data ? (
     <Main>
       <Header />
       <Cards category="Trending Now">{trending}</Cards>
       <Cards category="Recently Added">{recent}</Cards>
     </Main>
+  ) : (
+    <Spinner />
   );
 }
 

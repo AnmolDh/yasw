@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../components/Header";
+import Spinner from "../components/Spinner";
 
 const Main = styled.div`
   padding: 0 50px;
@@ -67,7 +68,7 @@ function Movie() {
     fetchInfo();
   }, []);
 
-  return (
+  return info ? (
     <Main>
       <BlurredBackground cover={info ? info.cover : "none"} />
       <TintOverlay />
@@ -96,6 +97,8 @@ function Movie() {
         </MovieInfo>
       </MovieContainer>
     </Main>
+  ) : (
+    <Spinner />
   );
 }
 
