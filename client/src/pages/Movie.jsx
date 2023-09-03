@@ -75,23 +75,32 @@ function Movie() {
       <Header />
       <MovieContainer>
         <div>
-          <img width="90%" src={info && info.image} alt={info && info.title} />
+          <img width="90%" src={info.image} alt={info.title} />
         </div>
         <MovieInfo>
-          <h1>{info && info.title}</h1>
-          <Description>{info && info.description}</Description>
+          <h1>{info.title}</h1>
+          <Description>{info.description}</Description>
           <div>
             <Details>
-              <strong>Country:</strong> {info && info.country}
+              <strong>Country:</strong> {info.country}
             </Details>
             <Details>
-              <strong>Genre:</strong> {info && info.genres}
+              <strong>Genre:</strong>{" "}
+              {info.genres.map((e) => (
+                <span>{e} </span>
+              ))}
             </Details>
             <Details>
-              <strong>Released:</strong> {info && info.releaseDate}{" "}
+              <strong>Released:</strong> {info.releaseDate}
             </Details>
             <Details>
-              <strong>Production:</strong> {info && info.production}
+              <strong>Production:</strong> {info.production}
+            </Details>
+            <Details>
+              <strong>Cast:</strong>{" "}
+              {info.casts.map((e) => (
+                <span>{e}. </span>
+              ))}
             </Details>
           </div>
         </MovieInfo>
