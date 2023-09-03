@@ -10,7 +10,7 @@ const Main = styled.div`
 `;
 
 function Home() {
-  const [data, setData] = useState({ trending: [], recent: [] });
+  const [data, setData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,13 +20,13 @@ function Home() {
     fetchData();
   }, []);
 
-  const trending = data.trending
+  const trending = data
     ? data.trending.map((e) => {
         return <Card key={e.id} data={e} />;
       })
     : null;
 
-  const recent = data.recent
+  const recent = data
     ? data.recent.map((e) => {
         return <Card key={e.id} data={e} />;
       })
