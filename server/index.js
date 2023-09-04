@@ -10,7 +10,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => res.send("API is Running!!"));
+
 app.get("/home", async (req, res) => {
+  console.log("req home");
   const trending = await api.fetchTrendingMovies();
   const recent = await api.fetchRecentMovies();
   res.send({ trending, recent });
@@ -36,5 +39,4 @@ app.get("/search/:query/:page?", async (req, res) => {
   const src = await api.fetchEpisodeSources(info.episodes[0].id, info.id);
   res.send(result);
 });
-
-app.listen("4000", () => console.log("Server started"));
+app.listen(4000, () => console.log("Server started"));

@@ -62,12 +62,13 @@ const Button = styled.button`
 `;
 
 function Movie() {
+  const serverUrl = import.meta.env.VITE_REACT_APP_SERVER_URL;
   const mediaId = useLocation().pathname;
   const [info, setInfo] = useState();
 
   useEffect(() => {
     const fetchInfo = async () => {
-      const res = await axios.get(`http://localhost:4000/info${mediaId}`);
+      const res = await axios.get(`${serverUrl}/info${mediaId}`);
       setInfo(res.data);
     };
     fetchInfo();
@@ -92,7 +93,7 @@ function Movie() {
             <Details>
               <strong>Genre:</strong>{" "}
               {info.genres.map((e) => (
-                <span>{e} </span>
+                <span key={e}>{e} </span>
               ))}
             </Details>
             <Details>
@@ -104,7 +105,7 @@ function Movie() {
             <Details>
               <strong>Cast:</strong>{" "}
               {info.casts.map((e) => (
-                <span>{e}. </span>
+                <span key={e}>{e}. </span>
               ))}
             </Details>
           </div>

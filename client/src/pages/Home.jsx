@@ -11,11 +11,12 @@ const Main = styled.div`
 `;
 
 function Home() {
+  const serverUrl = import.meta.env.VITE_REACT_APP_SERVER_URL;
   const [data, setData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://localhost:4000/home");
+      const res = await axios.get(`${serverUrl}/home`);
       setData(res.data);
     };
     fetchData();

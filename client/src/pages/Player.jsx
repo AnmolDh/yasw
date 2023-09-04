@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function Player() {
+  const serverUrl = import.meta.env.VITE_REACT_APP_SERVER_URL;
   const { category, mediaId, episodeId } = useParams();
   const videoRef = useRef(null);
   const [src, setSRC] = useState("");
@@ -12,7 +13,7 @@ function Player() {
     const fetchSRC = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/src/${category}/${mediaId}/${episodeId}`
+          `${serverUrl}/src/${category}/${mediaId}/${episodeId}`
         );
         setSRC(res.data.sources[0].url);
       } catch (error) {
