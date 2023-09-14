@@ -61,10 +61,13 @@ const Button = styled.button`
   font-size: 1.2rem;
 `;
 
-function Movie() {
+function Info() {
   const serverUrl = import.meta.env.VITE_REACT_APP_SERVER_URL;
   const mediaId = useLocation().pathname;
   const [info, setInfo] = useState();
+  const [noOfSeasons, setNoOfSeasons] = useState("");
+  const [selectedSeason, setSelectedSeason] = useState("");
+  const [noOfEpisodes, setNoOfEpisodes] = useState("");
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -73,6 +76,16 @@ function Movie() {
     };
     fetchInfo();
   }, []);
+
+  useEffect(() => {
+    const nos = new Set();
+    info &&
+      info.type == "TV Series" &&
+      info.episodes.map((ep) => {
+        nos.add(ep.season);
+      });
+    setNoOfSeasons(Array.from(nos));
+  }, [info]);
 
   return info ? (
     <Main>
@@ -109,9 +122,41 @@ function Movie() {
               ))}
             </Details>
           </div>
-          <Link to={`/player/${info.id}/${info.episodes[0].id}`}>
-            <Button>Play</Button>
-          </Link>
+          {info.type === "Movie" ? (
+            <Link to={`/player/${info.id}/${info.episodes[0].id}`}>
+              <Button>Play</Button>
+            </Link>
+          ) : (
+            <div>
+              <select
+                value={selectedSeason}
+                onChange={(e) => {
+                  const selectedSeason = e.target.value;
+                  setSelectedSeason(selectedSeason);
+                }}
+              >
+                <option value="">Select a season</option>
+                {noOfSeasons.map((s) => (
+                  <option key={s} value={s}>
+                    Season {s}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={noOfEpisodes}
+                onChange={(e) => setNoOfEpisodes(e.target.value)}
+              >
+                <option value="">Select an episode</option>
+                {info.episodes
+                  .filter((ep) => ep.season === selectedSeason)
+                  .map((ep) => (
+                    <option key={ep.id} value={ep.id}>
+                      {ep.title}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          )}
         </MovieInfo>
       </MovieContainer>
     </Main>
@@ -120,4 +165,4 @@ function Movie() {
   );
 }
 
-export default Movie;
+export default Info;

@@ -1,4 +1,4 @@
-import SyncLoader from "react-spinners/SyncLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 
 const Loader = styled.div`
@@ -12,7 +12,7 @@ const Loader = styled.div`
 function Spinner() {
   return (
     <Loader>
-      <SyncLoader color={"red"} />
+      <ClipLoader color={"red"} />
     </Loader>
   );
 }

@@ -34,9 +34,10 @@ app.get("/src/:category/:mediaId/:episodeId", async (req, res) => {
 
 app.get("/search/:query/:page?", async (req, res) => {
   const result = await api.search(req.params.query, req.params.page);
-  const movie = result.results[0];
-  const info = await api.fetchMediaInfo(movie.id);
-  const src = await api.fetchEpisodeSources(info.episodes[0].id, info.id);
+  // const movie = result.results[0];
+  // const info = await api.fetchMediaInfo(movie.id);
+  // const src = await api.fetchEpisodeSources(info.episodes[0].id, info.id);
   res.send(result);
 });
+
 app.listen(4000, () => console.log("Server started"));
