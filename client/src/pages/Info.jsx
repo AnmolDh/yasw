@@ -65,9 +65,10 @@ function Info() {
   const serverUrl = import.meta.env.VITE_REACT_APP_SERVER_URL;
   const mediaId = useLocation().pathname;
   const [info, setInfo] = useState();
-  const [noOfSeasons, setNoOfSeasons] = useState("");
+  const [noOfSeasons, setNoOfSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState("");
-  const [noOfEpisodes, setNoOfEpisodes] = useState("");
+  const [noOfEpisodes, setNoOfEpisodes] = useState([]);
+  const [selectedEpisode, setSelectedEpisode] = useState("");
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -86,6 +87,16 @@ function Info() {
       });
     setNoOfSeasons(Array.from(nos));
   }, [info]);
+
+  useEffect(() => {
+    const noe = new Array();
+    info &&
+      info.type == "TV Series" &&
+      info.episodes
+        .filter((ep) => ep.season == selectedSeason)
+        .map((ep) => noe.push(ep));
+    setNoOfEpisodes(noe);
+  }, [selectedSeason]);
 
   return info ? (
     <Main>
@@ -131,11 +142,10 @@ function Info() {
               <select
                 value={selectedSeason}
                 onChange={(e) => {
-                  const selectedSeason = e.target.value;
-                  setSelectedSeason(selectedSeason);
+                  setSelectedSeason(e.target.value);
                 }}
               >
-                <option value="">Select a season</option>
+                <option>Select a season</option>
                 {noOfSeasons.map((s) => (
                   <option key={s} value={s}>
                     Season {s}
@@ -143,17 +153,15 @@ function Info() {
                 ))}
               </select>
               <select
-                value={noOfEpisodes}
-                onChange={(e) => setNoOfEpisodes(e.target.value)}
+                value={selectedEpisode}
+                onChange={(e) => setSelectedEpisode(e.target.value)}
               >
                 <option value="">Select an episode</option>
-                {info.episodes
-                  .filter((ep) => ep.season === selectedSeason)
-                  .map((ep) => (
-                    <option key={ep.id} value={ep.id}>
-                      {ep.title}
-                    </option>
-                  ))}
+                {noOfEpisodes.map((ep) => (
+                  <option key={ep.id} value={ep.id}>
+                    {ep.title}
+                  </option>
+                ))}
               </select>
             </div>
           )}
