@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" exact element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/:category/:id" element={<Info />} />
         <Route
           path="/player/:category/:mediaId/:episodeId"
