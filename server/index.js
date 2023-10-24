@@ -22,7 +22,7 @@ app.get("/tv", async (req, res) => {
   const trending = await api.fetchTrendingTvShows();
   const recent = await api.fetchRecentTvShows();
   res.send({ trending, recent });
-})
+});
 
 app.get("/info/:category/:mediaId", async (req, res) => {
   const mediaId = req.params.category + "/" + req.params.mediaId;
@@ -38,6 +38,7 @@ app.get("/src/:category/:mediaId/:episodeId", async (req, res) => {
 });
 
 app.get("/search/:query/:page?", async (req, res) => {
+  console.log(req.params);
   const result = await api.search(req.params.query, req.params.page);
   // const movie = result.results[0];
   // const info = await api.fetchMediaInfo(movie.id);
