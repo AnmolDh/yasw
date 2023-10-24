@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -34,9 +34,7 @@ function PlaySrc(props) {
   }, [selectedSeason]);
 
   return props.info.type === "Movie" ? (
-    <Link
-      to={`/player/${props.info.id}/${props.info.episodes[0].id}`}
-    >
+    <Link to={`/player/${props.info.id}/${props.info.episodes[0].id}`}>
       <Button>Play</Button>
     </Link>
   ) : (
@@ -65,6 +63,13 @@ function PlaySrc(props) {
           </option>
         ))}
       </select>
+      {selectedSeason && selectedEpisode && (
+        <div>
+          <Link to={`/player/${props.info.id}/${props.info.episodes[0].id}`}>
+            <Button>Play</Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

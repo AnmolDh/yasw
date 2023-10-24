@@ -12,15 +12,16 @@ const Main = styled.div`
 
 function Home() {
   const serverUrl = import.meta.env.VITE_REACT_APP_SERVER_URL;
+  const [page, setPage] = useState("home");
   const [data, setData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`${serverUrl}/home`);
+      const res = await axios.get(`${serverUrl}/${page}`);
       setData(res.data);
     };
     fetchData();
-  }, []);
+  }, [page]);
 
   const trending = data
     ? data.trending.map((e) => {
@@ -37,6 +38,7 @@ function Home() {
   return data ? (
     <Main>
       <Header />
+      <button onClick={()=>{setPage("tv")}}>TV</button>
       <Cards category="Trending Now">{trending}</Cards>
       <Cards category="Recently Added">{recent}</Cards>
     </Main>

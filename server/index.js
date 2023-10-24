@@ -13,11 +13,16 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => res.send("API is Running!!"));
 
 app.get("/home", async (req, res) => {
-  console.log("req home");
   const trending = await api.fetchTrendingMovies();
   const recent = await api.fetchRecentMovies();
   res.send({ trending, recent });
 });
+
+app.get("/tv", async (req, res) => {
+  const trending = await api.fetchTrendingTvShows();
+  const recent = await api.fetchRecentTvShows();
+  res.send({ trending, recent });
+})
 
 app.get("/info/:category/:mediaId", async (req, res) => {
   const mediaId = req.params.category + "/" + req.params.mediaId;

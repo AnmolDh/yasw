@@ -37,14 +37,14 @@ const TintOverlay = styled.div`
   z-index: -1;
 `;
 
-const MovieContainer = styled.div`
+const InfoContainer = styled.div`
   display: flex;
   background-color: transparent;
   padding: 20px;
   z-index: 1;
 `;
 
-const MovieInfo = styled.div`
+const SrcInfo = styled.div`
   flex: 1;
 `;
 
@@ -75,18 +75,17 @@ function Info() {
       <BlurredBackground cover={info ? info.cover : "none"} />
       <TintOverlay />
       <Header />
-      <MovieContainer>
+      <InfoContainer>
         <div>
           <img width="90%" src={info.image} alt={info.title} />
         </div>
-        <MovieInfo>
+        <SrcInfo>
           <h1>{info.title}</h1>
           <Description>{info.description}</Description>
           <div>
             <Details>
               <strong>Country:</strong> {info.country}
             </Details>
-            x
             <Details>
               <strong>Genre:</strong>{" "}
               {info.genres.map((e) => (
@@ -107,8 +106,8 @@ function Info() {
             </Details>
           </div>
           <PlaySrc info={info} />
-        </MovieInfo>
-      </MovieContainer>
+        </SrcInfo>
+      </InfoContainer>
     </Main>
   ) : (
     <Spinner />
