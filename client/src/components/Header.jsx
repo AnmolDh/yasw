@@ -16,15 +16,29 @@ const LI = styled.li`
   margin: 0 10px;
 `;
 
-function Header() {
+function Header({setPage}) {
   return (
     <HeaderDiv>
       <img width="102px" height="33px" src={logo} />
       <UL>
         <LI>
-          <strong>Home</strong>
+          <button
+            onClick={() => {
+              setPage("home");
+            }}
+          >
+            Home
+          </button>
         </LI>
-        <LI>TV Shows</LI>
+        <LI>
+          <button
+            onClick={() => {
+              setPage("tv");
+            }}
+          >
+            TV Shows
+          </button>
+        </LI>
         <LI>Movies</LI>
         <LI>Recently Added</LI>
       </UL>

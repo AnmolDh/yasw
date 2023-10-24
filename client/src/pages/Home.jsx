@@ -37,8 +37,7 @@ function Home() {
 
   return data ? (
     <Main>
-      <Header />
-      <button onClick={()=>{setPage("tv")}}>TV</button>
+      <Header setPage={setPage} />
       <Cards category="Trending Now">{trending}</Cards>
       <Cards category="Recently Added">{recent}</Cards>
     </Main>
