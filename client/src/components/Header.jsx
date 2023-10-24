@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import logo from "../assets/logo.png";
 
 const HeaderDiv = styled.header`
   display: flex;
@@ -18,11 +19,7 @@ const LI = styled.li`
 function Header() {
   return (
     <HeaderDiv>
-      <img
-        width="102px"
-        height="33px"
-        src="https://raw.githubusercontent.com/carlosavilae/Netflix-Clone/master/img/logo.PNG"
-      />
+      <img width="102px" height="33px" src={logo} />
       <UL>
         <LI>
           <strong>Home</strong>
